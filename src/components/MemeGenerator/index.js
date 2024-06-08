@@ -68,7 +68,7 @@ class MemeGenerator extends Component {
   }
   onGenerateButton = event => {
     event.preventDefault()
-    const {backImageInput, topTextInput, bottomTextInput, activeFontSize} =
+    const {backImageInput, topTextInput, bottomTextInput, fontSizeInput} =
       this.state
     this.setState({
       backImages: backImageInput,
@@ -98,7 +98,7 @@ class MemeGenerator extends Component {
           onChange={this.onChangeTopTextInput}
           placeholder="Enter the Top Text"
         />
-        <LabelContainer htmlFor="textss">Top Text</LabelContainer>
+        <LabelContainer htmlFor="textss">Bottom Text</LabelContainer>
         <InputContainer
           type="text"
           id="textss"
@@ -118,14 +118,16 @@ class MemeGenerator extends Component {
             </OptionContainer>
           ))}
         </SelectContainer>
-        <CustomButton type="submit">Generate</CustomButton>
+        <div>
+          <CustomButton type="submit">Generate</CustomButton>
+        </div>
       </FormContainer>
     )
   }
   renderMemes = () => {
     const {backImages, topText, bottomText, activeFontSize} = this.state
     return (
-      <MemeContents backgroundImage={backImages}>
+      <MemeContents backgroundImage={backImages} data-testid="meme">
         <TextContent activeFontSize={activeFontSize}>{topText}</TextContent>
         <TextContent activeFontSize={activeFontSize}>{bottomText}</TextContent>
       </MemeContents>
@@ -137,8 +139,8 @@ class MemeGenerator extends Component {
         <MemeGeneratorss>
           <HeadingContainer>Meme Generator</HeadingContainer>
           <DivContainer>
-            {this.renderMemes()}
             {this.onRenderMemeGenerator()}
+            {this.renderMemes()}
           </DivContainer>
         </MemeGeneratorss>
       </AppContainer>
